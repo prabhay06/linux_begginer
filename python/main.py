@@ -2,24 +2,33 @@ import pandas as pd
 import time
 import joblib
 
-def run_awareness_system(data_path='haptic_awareness_system/simulated_data.csv', model_path='haptic_awareness_system/alert_model.joblib'):
+import os
+
+def run_awareness_system(data_path='simulated_data.csv', model_path='alert_model.joblib'):
     """
     Simulates the haptic awareness system by reading sensor data
     and providing alerts using a machine learning model.
     """
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+
+    # Define absolute paths
+    abs_data_path = os.path.join(script_dir, data_path)
+    abs_model_path = os.path.join(script_dir, model_path)
+
     # Load the trained model
     try:
-        model = joblib.load(model_path)
+        model = joblib.load(abs_model_path)
     except FileNotFoundError:
-        print(f"Error: Model file not found at {model_path}")
-        print("Please run train_model.py first to train and save the model.")
+        print(f"Error: Model file not found at {abs_model_path}")
+        print("Please run 'train_model.py' first to train and save the model.")
         return
 
     try:
-        data = pd.read_csv(data_path)
+        data = pd.read_csv(abs_data_path)
     except FileNotFoundError:
-        print(f"Error: Data file not found at {data_path}")
-        print("Please run data_simulator.py first to generate the data.")
+        print(f"Error: Data file not found at {abs_data_path}")
+        print("Please run 'data_simulator.py' first to generate the data.")
         return
 
     print("Starting haptic awareness system with ML model...")

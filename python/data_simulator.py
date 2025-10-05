@@ -29,7 +29,14 @@ def generate_data(num_samples=1000):
 
     return df
 
+import os
+
 if __name__ == "__main__":
+    # Get the directory of the current script
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    # Define the output path relative to the script's directory
+    output_path = os.path.join(script_dir, 'simulated_data.csv')
+
     data = generate_data()
-    data.to_csv('haptic_awareness_system/simulated_data.csv', index=False)
-    print("Simulated data generated and saved to 'haptic_awareness_system/simulated_data.csv'")
+    data.to_csv(output_path, index=False)
+    print(f"Simulated data generated and saved to '{output_path}'")

@@ -1,9 +1,0 @@
-# Ignore generated data and model files
-simulated_data.csv
-alert_model.joblib
-
-# Ignore Python cache files
-__pycache__/
-*.pyc
-*.pyo
-*.pyd
